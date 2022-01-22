@@ -36,7 +36,7 @@ int main(int argc, const char *argv[]) {
                 message = (static_cast<int>(symbols[i]) << 8) | (static_cast<int>(symbols[i + 1]));
             }
             int message_with_gamma =  message ^ XOR & 0xFFFF;
-            int message_encrypted = ((message_with_gamma << 2) & 0xFFFF | (message_with_gamma >> 14) & 0xFFFF);
+            int message_encrypted = ((message_with_gamma << 4) & 0xFFFF | (message_with_gamma >> 12) & 0xFFFF);
             char v = message_encrypted >> 8;
             char v1 = message_encrypted;
             file << v << v1;
@@ -62,7 +62,7 @@ int main(int argc, const char *argv[]) {
             else
                 message_encrypt = (static_cast<int>(symbols[i]) << 8);
             int message_with_gamma =
-                    ((message_encrypt >> 2) & 0xFFFF) | ((message_encrypt << (16 - 2)) & 0xFFFF);
+                    ((message_encrypt >> 4) & 0xFFFF) | ((message_encrypt << (16 - 4)) & 0xFFFF);
             int message_decrypt = message_with_gamma ^ XOR;
             char v = message_decrypt >> 8;
             char v1 = message_decrypt;
